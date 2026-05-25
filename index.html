@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea AI Playbook v4.2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+  :root {
+    --bg: #faf8f5;
+    --card-bg: #ffffff;
+    --text: #2c2c2c;
+    --text-muted: #6b6b6b;
+    --border: #e5e0d5;
+    --accent-ops: #4a5568;
+    --accent-gov: #2d3748;
+    --accent-agent: #5a67d8;
+    --accent-autonomy: #319795;
+    --accent-sop: #c05621;
+    --accent-arch: #6b46c1;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Serif', 'Georgia', 'Times New Roman', serif;
+    line-height: 1.7;
+    font-weight: 350;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem 4rem;
+  }
+
+  /* ── Header ── */
+  header {
+    text-align: center;
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--accent-gov);
+    margin-bottom: 0.35rem;
+  }
+  header .version {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--accent-gov);
+    color: #fff;
+    padding: 0.25rem 0.9rem;
+    border-radius: 4px;
+    margin-bottom: 0.6rem;
+  }
+  header .subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+
+  /* ── Section cards ── */
+  section {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2.2rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+  }
+  section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  section h2 .dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .dot-gov { background: var(--accent-gov); }
+  .dot-agent { background: var(--accent-agent); }
+  .dot-autonomy { background: var(--accent-autonomy); }
+  .dot-sop { background: var(--accent-sop); }
+  .dot-arch { background: var(--accent-arch); }
+
+  .mermaid-wrapper {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+  }
+  .mermaid-wrapper svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ── Legend tables ── */
+  .legend-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.75rem 0.9rem;
+    background: var(--bg);
+    border-radius: 6px;
+    font-size: 0.9rem;
+  }
+  .legend-item .icon {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #fff;
+  }
+  .legend-item .desc strong {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+    line-height: 1.3;
+    margin-bottom: 0.15rem;
+  }
+  .legend-item .desc span {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    padding: 2rem 0 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1rem;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .container { padding: 1.5rem 1rem; }
+    header h1 { font-size: 1.7rem; }
+    section { padding: 1.5rem 1.2rem; }
+    .legend-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <div class="version">v4.2</div>
+  <h1>Andrea AI Playbook</h1>
+  <p class="subtitle">Governance &amp; Supervisione — Architettura Multi-Agente</p>
+</header>
+
+<!-- ═══════════════ 1. GOVERNANCE + AGENTS ═══════════════ -->
+<section>
+  <h2><span class="dot dot-gov"></span> Struttura Organizzativa</h2>
+  <div class="mermaid-wrapper">
+    <div class="mermaid">
+flowchart TB
+    subgraph GOV["🛡️ Governance &amp; Supervisione"]
+        direction LR
+        CLEO["Cleo<br/><small>Head of Operations</small><br/>📊 Monitora infrastruttura"]
+        ATLAS["Atlas<br/><small>Team Leader</small><br/>📋 Performance &amp; task"]
+        COUNSEL["Counsel<br/><small>Quality Assurance</small><br/>✅ Standard &amp; qualità"]
+    </div>
+
+    subgraph AGENTS["🤖 Agenti Specialisti"]
+        direction TB
+        subgraph ROW1[" "]
+            direction LR
+            MAX["Max<br/><small>Backend &amp; Coding</small><br/>💻 Sviluppo, algoritmi"]
+            PIXEL["Pixel<br/><small>UI/UX &amp; Design</small><br/>🎨 Interfacce, visual"]
+            SCRIBE["Scribe<br/><small>Writing &amp; Content</small><br/>✍️ Copy, documentazione"]
+            MARK["Mark<br/><small>Marketing &amp; Strategy</small><br/>📣 Strategie, comunicazione"]
+        end
+        subgraph ROW2[" "]
+            direction LR
+            LEX["Lex<br/><small>Legal &amp; Compliance</small><br/>⚖️ Analisi, contratti"]
+            SCOUT["Scout<br/><small>Research &amp; Data</small><br/>🔍 Ricerca, dati"]
+            VISA["Visa<br/><small>Immigration &amp; Bureaucracy</small><br/>📑 Pratiche, visti"]
+        end
+    end
+
+    subgraph ARCH["⚙️ Architettura"]
+        direction LR
+        GW["Gateway Unificato<br/>🚪 Ingresso richieste"]
+        MEM["Memoria Condivisa<br/>🧠 Database vettoriale"]
+        SKILL["Skill Dinamiche<br/>📦 Repository on-demand"]
+    end
+
+    GOV -->|"supervisiona &amp; assegna"| AGENTS
+    AGENTS -->|"interroga &amp; utilizza"| ARCH
+
+    classDef govStyle fill:#2d3748,stroke:#1a202c,color:#fff,stroke-width:2px,rx:8,font-family:'IBM Plex Serif',serif
+    classDef agentStyle fill:#ebf4ff,stroke:#5a67d8,color:#2d3748,stroke-width:1.5px,rx:8,font-family:'IBM Plex Serif',serif
+    classDef archStyle fill:#faf5ff,stroke:#6b46c1,color:#44337a,stroke-width:1.5px,rx:8,font-family:'IBM Plex Serif',serif
+
+    class CLEO,ATLAS,COUNSEL govStyle
+    class MAX,PIXEL,SCRIBE,MARK,LEX,SCOUT,VISA agentStyle
+    class GW,MEM,SKILL archStyle
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 2. AUTONOMY LEVELS ═══════════════ -->
+<section>
+  <h2><span class="dot dot-autonomy"></span> Livelli di Autonomia</h2>
+  <div class="mermaid-wrapper">
+    <div class="mermaid">
+flowchart LR
+    A0["🔴 A0<br/><strong>Supervisione Estesa</strong><br/>Richiede sempre<br/>approvazione"]
+    A1["🟡 A1<br/><strong>Supervisione Moderata</strong><br/>Notifica azioni,<br/>chiede per task complessi"]
+    A2["🟢 A2<br/><strong>Autonomia Supervisionata</strong><br/>Notifica azioni,<br/>procede in autonomia"]
+    A3["🔵 A3<br/><strong>Autonomia Completa</strong><br/>Agisce in piena autonomia,<br/>riporta i risultati"]
+
+    A0 -->|"cresce"| A1 -->|"cresce"| A2 -->|"cresce"| A3
+
+    classDef a0 fill:#fff5f5,stroke:#e53e3e,color:#742a2a,stroke-width:2px,rx:10,font-family:'IBM Plex Serif',serif
+    classDef a1 fill:#fffff0,stroke:#d69e2e,color:#744210,stroke-width:2px,rx:10,font-family:'IBM Plex Serif',serif
+    classDef a2 fill:#f0fff4,stroke:#38a169,color:#22543d,stroke-width:2px,rx:10,font-family:'IBM Plex Serif',serif
+    classDef a3 fill:#ebf8ff,stroke:#3182ce,color:#2a4365,stroke-width:2px,rx:10,font-family:'IBM Plex Serif',serif
+
+    class A0 a0
+    class A1 a1
+    class A2 a2
+    class A3 a3
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ 3. SOP ═══════════════ -->
+<section>
+  <h2><span class="dot dot-sop"></span> Protocolli Operativi (SOP)</h2>
+  <div class="legend-grid">
+    <div class="legend-item">
+      <div class="icon" style="background:var(--accent-sop); opacity:0.6;">P1</div>
+      <div class="desc">
+        <strong>P1: Low Risk</strong>
+        <span>Azioni sicure, a basso impatto, completamente automatizzabili (es. cleanup, letture).</span>
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="icon" style="background:var(--accent-sop); opacity:0.8;">P2</div>
+      <div class="desc">
+        <strong>P2: Conditional</strong>
+        <span>Esegui e notifica. Se la fiducia è alta, procedi; altrimenti, chiedi conferma.</span>
+      </div>
+    </div>
+    <div class="legend-item">
+      <div class="icon" style="background:var(--accent-sop); opacity:1.0;">P3</div>
+      <div class="desc">
+        <strong>P3: High Risk</strong>
+        <span>Richiede sempre l'approvazione umana esplicita prima di qualsiasi azione (es. pagamenti).</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- Mermaid.js -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      fontFamily: `"IBM Plex Serif", serif`,
+      fontSize: "14px",
+      primaryColor: '#faf8f5',
+      primaryTextColor: '#2c2c2c',
+      primaryBorderColor: '#e5e0d5',
+      lineColor: '#6b6b6b',
+      secondaryColor: '#f0f0f0',
+      tertiaryColor: '#fff'
+    },
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true
+    }
+  });
+</script>
+
+<footer>
+  <p>&copy; 2026 Andrea Sassi</p>
+</footer>
+
+</body>
+</html>
